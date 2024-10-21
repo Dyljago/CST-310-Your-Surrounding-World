@@ -37,9 +37,9 @@
 
 
 // Function prototypes
-void key_callback(GLFWwindow* window, int key, int scancode, int action, int mode);
-void do_movement();
-void mouse_callback(GLFWwindow* window, double xpos, double ypos);
+// void key_callback(GLFWwindow* window, int key, int scancode, int action, int mode);
+// void do_movement();
+// void mouse_callback(GLFWwindow* window, double xpos, double ypos);
 GLFWwindow* windowInit();
 void SetupOpenGLState(Shader& ourShader, GLint& objectColorLoc, GLint& modelLoc);
 
@@ -106,6 +106,8 @@ struct Towel {
             std::cerr << "ERROR::ASSIMP:: " << importer.GetErrorString() << std::endl;
             return;
         }
+
+        std::cout << "Loading object: " << objFilePath << std::endl;
 
         std::vector<float> vertices;
 
@@ -199,7 +201,7 @@ struct Towel {
         // Set the brighter to false
         glUniform1f(glGetUniformLocation(shader.Program, "brighter"), true);
         glActiveTexture(GL_TEXTURE0);
-        GLuint texture = loadTexture("./container_original copy.jpg"); // This works
+        GLuint texture = loadTexture("./Textures/container_original copy.jpg"); // This works
         glBindTexture(GL_TEXTURE_2D, texture); // No texture
         glUniform1i(glGetUniformLocation(shader.Program, "texture1"), 0);
         glUniform1i(glGetUniformLocation(shader.Program, "useTexture"), 0); // disable texture usage
@@ -373,7 +375,7 @@ struct Cube {
             glUniform1i(glGetUniformLocation(shader.Program, "useTexture"), 1); // Enable texture usage
         } else {
             glActiveTexture(GL_TEXTURE0);
-            GLuint texture = loadTexture("./container_original copy.jpg"); // This works
+            GLuint texture = loadTexture("./Textures/container_original copy.jpg"); // This works
             glBindTexture(GL_TEXTURE_2D, texture); // No texture
             glUniform1i(glGetUniformLocation(shader.Program, "texture1"), 0);
             glUniform1i(glGetUniformLocation(shader.Program, "useTexture"), 0); // disable texture usage
@@ -557,7 +559,7 @@ struct wiiGame {
             glUniform1i(glGetUniformLocation(shader.Program, "useTexture"), 1); // Enable texture usage
         } else {
             glActiveTexture(GL_TEXTURE0);
-            GLuint texture = loadTexture("./container_original copy.jpg"); // This works
+            GLuint texture = loadTexture("./Textures/container_original copy.jpg"); // This works
             glBindTexture(GL_TEXTURE_2D, texture); // No texture
             glUniform1i(glGetUniformLocation(shader.Program, "texture1"), 0);
             glUniform1i(glGetUniformLocation(shader.Program, "useTexture"), 0); // disable texture usage
@@ -704,7 +706,7 @@ struct Pyramid {
         // Set the brighter to false
         glUniform1f(glGetUniformLocation(shader.Program, "brighter"), false);
         glActiveTexture(GL_TEXTURE0);
-        GLuint texture = loadTexture("./container_original copy.jpg"); // This works
+        GLuint texture = loadTexture("./Textures/container_original copy.jpg"); // This works
         glBindTexture(GL_TEXTURE_2D, texture); // No texture
         glUniform1i(glGetUniformLocation(shader.Program, "texture1"), 0);
         glUniform1i(glGetUniformLocation(shader.Program, "useTexture"), 0); // disable texture usage
@@ -863,7 +865,7 @@ struct Trapezoid {
         // Set the brighter to false
         glUniform1f(glGetUniformLocation(shader.Program, "brighter"), false);
         glActiveTexture(GL_TEXTURE0);
-        GLuint texture = loadTexture("./container_original copy.jpg"); // This works
+        GLuint texture = loadTexture("./Textures/container_original copy.jpg"); // This works
         glBindTexture(GL_TEXTURE_2D, texture); // No texture
         glUniform1i(glGetUniformLocation(shader.Program, "texture1"), 0);
         glUniform1i(glGetUniformLocation(shader.Program, "useTexture"), 0); // disable texture usage
@@ -911,7 +913,7 @@ int main()
         glm::vec3(3.0f, 2.0f, 0.2f), 
         glm::vec3(0.0f), 
         glm::vec4(0.876f, 0.848f, 0.784f, 1.0f),
-        "wall.jpg"
+        "./Textures/wall.jpg"
     );
 
     Cube Trim(
@@ -928,7 +930,7 @@ int main()
         glm::vec3(3.0f, 2.0f, 0.2f), 
         glm::vec3(90.0f, 0.0f, 0.0f), 
         glm::vec4(0.464f, 0.372f, 0.3f, 1.0f),
-        "./floor.jpg"
+        "./Textures/floor.jpg"
     );
     // ----------------------------------------------------------------------------
 
@@ -942,7 +944,7 @@ int main()
         glm::vec3(feetToMeters(4.81f), inchesToMeters(10.0f), feetToMeters(2.0f)), // Scale
         glm::vec3(0.0f),                                                    // Angle
         glm::vec4(1.0f),                    // Color (wooden)
-        "./wood_grain_rot.jpg"
+        "./Textures/wood_grain_rot.jpg"
     );
     tvStandParts.push_back(drawer);
 
@@ -961,7 +963,7 @@ int main()
         glm::vec3(feetToMeters(4.81f), inchesToMeters(1.0f), feetToMeters(2.0f)), // Scale
         glm::vec3(0.0f),                                                    // Angle
         glm::vec4(0.0f, 0.0f, 0.0f, 1.0f),
-        "./side.jpg"
+        "./Textures/side.jpg"
     );
     tvStandParts.push_back(drawerSide);
 
@@ -971,7 +973,7 @@ int main()
         glm::vec3(feetToMeters(4.805f)/40, inchesToMeters(0.99f), feetToMeters(1.99f)), // Scale
         glm::vec3(0.0f),                                                    // Angle
         glm::vec4(0.0f, 0.0f, 0.0f, 1.0f),
-        "./side.jpg"
+        "./Textures/side.jpg"
     );
     tvStandParts.push_back(drawerEdge);
 
@@ -981,7 +983,7 @@ int main()
         glm::vec3(feetToMeters(4.805f)/40, inchesToMeters(0.99f), feetToMeters(2.05f)), // Scale
         glm::vec3(0.0f, 15.0f, 0.0f),                                                    // Angle
         glm::vec4(0.0f, 0.0f, 0.0f, 0.6f),
-        "./reflect.jpg"
+        "./Textures/reflect.jpg"
     );
     tvStandParts.push_back(drawerReflection);
     Cube drawerReflection2(
@@ -990,7 +992,7 @@ int main()
         glm::vec3(feetToMeters(4.805f)/20, inchesToMeters(0.99f), feetToMeters(1.99f)), // Scale
         glm::vec3(0.0f, 0.0f, 0.0f),                                                    // Angle
         glm::vec4(0.0f, 0.0f, 0.0f, 0.6f),
-        "./reflect.jpg"
+        "./Textures/reflect.jpg"
     );
     tvStandParts.push_back(drawerReflection2);
 
@@ -1000,7 +1002,7 @@ int main()
         glm::vec3(feetToMeters(4.805f), inchesToMeters(0.99f), feetToMeters(1.99f)), // Scale
         glm::vec3(0.0f),                                                    // Angle
         glm::vec4(0.0f, 0.0f, 0.0f, 0.9f),
-        "./base.jpg"
+        "./Textures/base.jpg"
     );
     tvStandParts.push_back(drawerTop);
 
@@ -1011,7 +1013,7 @@ int main()
         glm::vec3(feetToMeters(4.0f), inchesToMeters(10.0f), feetToMeters(1.8f)), // Scale
         glm::vec3(0.0f),                                                    // Angle
         glm::vec4(0.288f, 0.188f, 0.16f, 1.0f),                    // Color (wooden)
-        "./wood_grain.jpg"
+        "./Textures/wood_grain.jpg"
     );
     tvStandParts.push_back(innerDrawer);
 
@@ -1022,7 +1024,7 @@ int main()
         glm::vec3(feetToMeters(0.8f), inchesToMeters(1.0f), feetToMeters(0.1f)), // Scale
         glm::vec3(0.0f),                                                     // Angle
         glm::vec4(0.0f, 0.0f, 0.0f, 1.0f),                       // Color (Black)
-        "./handle.jpg"
+        "./Textures/handle.jpg"
     );
     tvStandParts.push_back(handle);
 
@@ -1032,7 +1034,7 @@ int main()
         glm::vec3(inchesToMeters(1.0f), inchesToMeters(1.0f), feetToMeters(0.4f)), // Scale
         glm::vec3(0.0f),                                          // Angle
         glm::vec4(0.0f, 0.0f, 0.0f, 1.0f),                       // Color (Black)
-        "./innerHandle.jpg"                     
+        "./Textures/innerHandle.jpg"                     
     );
     tvStandParts.push_back(handleLeft);
 
@@ -1042,7 +1044,7 @@ int main()
         glm::vec3(inchesToMeters(1.0f), inchesToMeters(1.0f), feetToMeters(0.4f)), // Scale
         glm::vec3(0.0f),                                          // Angle
         glm::vec4(0.0f, 0.0f, 0.0f, 1.0f),                       // Color (Black)
-        "./innerHandle.jpg"
+        "./Textures/innerHandle.jpg"
     );
     tvStandParts.push_back(handleRight);
 
@@ -1062,7 +1064,7 @@ int main()
             glm::vec3(inchesToMeters(5.0f), inchesToMeters(4.0f), inchesToMeters(1.5f)),
             glm::vec3(0.0f), 
             glm::vec4(0.228f, 0.152f, 0.128f, 1.0f),
-            "./wood_grain_rot.jpg"     
+            "./Textures/wood_grain_rot.jpg"     
         );
         tvStandParts.push_back(foot);
     }
@@ -1091,7 +1093,7 @@ int main()
             scale,
             glm::vec3(0.0f),
             glm::vec4(0.228f, 0.152f, 0.128f, 1.0f),
-            "./wood_grain_rot.jpg"
+            "./Textures/wood_grain_rot.jpg"
         );
         i++;
         tvStandParts.push_back(post);
@@ -1104,7 +1106,7 @@ int main()
         glm::vec3(feetToMeters(1.2f), inchesToMeters(0.1f), feetToMeters(2.0f)),
         glm::vec3(0.0f), 
         glm::vec4(1.0f, 1.0f, 1.0f, 0.6f),
-        "./wall.jpg"
+        "./Textures/wall.jpg"
     );
     tvStandParts.push_back(topShelfHighlight);
 
@@ -1285,24 +1287,24 @@ int main()
     };    
 
     const char* gameTextures[] = {
-        "./game1.jpg",
-        "./game3.jpg",
-        "./game4.jpg",
-        "./game5.jpg",
-        "./game6.jpg",
-        "./game7.jpg",
-        "./game8.jpg",
-        "./game2.jpg",
+        "./Textures/game1.jpg",
+        "./Textures/game3.jpg",
+        "./Textures/game4.jpg",
+        "./Textures/game5.jpg",
+        "./Textures/game6.jpg",
+        "./Textures/game7.jpg",
+        "./Textures/game8.jpg",
+        "./Textures/game2.jpg",
 
-        "./game9.jpg",
-        "./game10.jpg",
-        "./game11.jpg",
-        "./game12.jpg",
-        "./game13.jpg",
-        "./game14.jpg",
-        "./game12.jpg",
-        "./game13.jpg",
-        "./game3.jpg",
+        "./Textures/game9.jpg",
+        "./Textures/game10.jpg",
+        "./Textures/game11.jpg",
+        "./Textures/game12.jpg",
+        "./Textures/game13.jpg",
+        "./Textures/game14.jpg",
+        "./Textures/game12.jpg",
+        "./Textures/game13.jpg",
+        "./Textures/game3.jpg",
     };
 
     glm::vec4 colors[] = {
@@ -1360,7 +1362,7 @@ int main()
         glm::vec3(feetToMeters(3.45f), inchesToMeters(22.5f), feetToMeters(0.1f)), // Scale
         glm::vec3(0.0f),                                                    // Angle
         glm::vec4(0.168f, 0.168f, 0.168f, 0.9f),                    // Color (wooden)
-        "./tv.jpg"
+        "./Textures/tv.jpg"
     );
     TelevisionParts.push_back(tvScreen);
 
@@ -1477,7 +1479,7 @@ int main()
         lastFrame = currentFrame;
 
         // Handle Input
-        do_movement();
+        // do_movement();
 
         // Set up the OpenGL state and return the objectColorLoc and modelLoc
         SetupOpenGLState(ourShader, objectColorLoc, modelLoc);
@@ -1675,11 +1677,11 @@ GLFWwindow* windowInit()
     GLFWwindow* window = glfwCreateWindow(WIDTH, HEIGHT, "CST-310 Project 5", nullptr, nullptr);
     glfwMakeContextCurrent(window);
     // Set the required callback functions
-    glfwSetKeyCallback(window, key_callback);
-    glfwSetCursorPosCallback(window, mouse_callback);
+    // glfwSetKeyCallback(window, key_callback);
+    // glfwSetCursorPosCallback(window, mouse_callback);
 
     // GLFW Options
-    glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+    // glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 
     // Set this to true so GLEW knows to use a modern approach to retrieving function pointers and extensions
     glewExperimental = GL_TRUE;
