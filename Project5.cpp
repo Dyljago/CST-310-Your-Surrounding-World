@@ -200,10 +200,6 @@ struct Towel {
     void draw(Shader &shader, const GLint &objectColorLoc, const GLint &modelLoc) const {
         // Set the brighter to false
         glUniform1f(glGetUniformLocation(shader.Program, "brighter"), true);
-        glActiveTexture(GL_TEXTURE0);
-        GLuint texture = loadTexture("./Textures/container_original copy.jpg"); // This works
-        glBindTexture(GL_TEXTURE_2D, texture); // No texture
-        glUniform1i(glGetUniformLocation(shader.Program, "texture1"), 0);
         glUniform1i(glGetUniformLocation(shader.Program, "useTexture"), 0); // disable texture usage
         // Create a default model to adjust
         glm::mat4 model = glm::mat4(1.0f);
@@ -374,10 +370,6 @@ struct Cube {
             glUniform1i(glGetUniformLocation(shader.Program, "texture1"), 0);
             glUniform1i(glGetUniformLocation(shader.Program, "useTexture"), 1); // Enable texture usage
         } else {
-            glActiveTexture(GL_TEXTURE0);
-            GLuint texture = loadTexture("./Textures/container_original copy.jpg"); // This works
-            glBindTexture(GL_TEXTURE_2D, texture); // No texture
-            glUniform1i(glGetUniformLocation(shader.Program, "texture1"), 0);
             glUniform1i(glGetUniformLocation(shader.Program, "useTexture"), 0); // disable texture usage
         }
 
@@ -558,10 +550,6 @@ struct wiiGame {
             glUniform1i(glGetUniformLocation(shader.Program, "texture1"), 0);
             glUniform1i(glGetUniformLocation(shader.Program, "useTexture"), 1); // Enable texture usage
         } else {
-            glActiveTexture(GL_TEXTURE0);
-            GLuint texture = loadTexture("./Textures/container_original copy.jpg"); // This works
-            glBindTexture(GL_TEXTURE_2D, texture); // No texture
-            glUniform1i(glGetUniformLocation(shader.Program, "texture1"), 0);
             glUniform1i(glGetUniformLocation(shader.Program, "useTexture"), 0); // disable texture usage
         }
 
@@ -705,10 +693,6 @@ struct Pyramid {
     void draw(Shader &shader, const GLint &objectColorLoc, const GLint &modelLoc) const {
         // Set the brighter to false
         glUniform1f(glGetUniformLocation(shader.Program, "brighter"), false);
-        glActiveTexture(GL_TEXTURE0);
-        GLuint texture = loadTexture("./Textures/container_original copy.jpg"); // This works
-        glBindTexture(GL_TEXTURE_2D, texture); // No texture
-        glUniform1i(glGetUniformLocation(shader.Program, "texture1"), 0);
         glUniform1i(glGetUniformLocation(shader.Program, "useTexture"), 0); // disable texture usage
         // Create a default model to adjust
         glm::mat4 model = glm::mat4(1.0f);
@@ -864,10 +848,6 @@ struct Trapezoid {
     void draw(Shader &shader, const GLint &objectColorLoc, const GLint &modelLoc) const{
         // Set the brighter to false
         glUniform1f(glGetUniformLocation(shader.Program, "brighter"), false);
-        glActiveTexture(GL_TEXTURE0);
-        GLuint texture = loadTexture("./Textures/container_original copy.jpg"); // This works
-        glBindTexture(GL_TEXTURE_2D, texture); // No texture
-        glUniform1i(glGetUniformLocation(shader.Program, "texture1"), 0);
         glUniform1i(glGetUniformLocation(shader.Program, "useTexture"), 0); // disable texture usage
         // Create a default model to adjust
         glm::mat4 model = glm::mat4(1.0f);
