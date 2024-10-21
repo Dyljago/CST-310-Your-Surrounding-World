@@ -16,6 +16,8 @@ sudo apt install libsoil-dev
 Assimp:
 sudo apt install libassimp-dev
 
+This code can also be found at: https://github.com/Dyljago/CST-310-Your-Surrounding-World
+
 To run this code you must download the Shader.h, Camera.h, Project5.cpp, Project5.vs, and Project5.frag. Then download the Textures folder and the towel.obj and ensure they are in the same directory as the rest of the code. Once each of these are downloaded you should be able to run it.
 
 Once it runs, a string of textures and objects loading should appear in the terminal and our scene should appear. You will see a television stand, a Wii game console, two stacks of Wii games, a Wii sensor bar, a green towel, a television, and reflections within that television.
