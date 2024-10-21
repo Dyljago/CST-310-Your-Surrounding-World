@@ -46,7 +46,7 @@ void SetupOpenGLState(Shader& ourShader, GLint& objectColorLoc, GLint& modelLoc)
 // Window dimensions
 const GLuint WIDTH = 800, HEIGHT = 600;
 
-Camera  camera(glm::vec3(-0.0226796f, 0.983629f, 1.91857f), glm::vec3(0.0f, 1.0f, 0.0f), -90.0f, -9.0f);
+Camera  camera(glm::vec3(-0.0226796f, 0.883629f, 1.91857f), glm::vec3(0.0f, 1.0f, 0.0f), -90.1667f, -6.66667f);
 // Camera
 glm::vec3 cameraPos   = glm::vec3(0.0f, 0.0f,  3.0f);
 glm::vec3 cameraFront = glm::vec3(0.0f, 0.0f, -1.0f);
@@ -899,7 +899,7 @@ int main()
     //glfwSetCursorPos(window, WIDTH / 2, HEIGHT / 2);
 
     // Build and compile our shader program
-    Shader ourShader("Project4.vs", "Project4.frag");
+    Shader ourShader("Project5.vs", "Project5.frag");
 
     // Object Color and Model Location
     GLint objectColorLoc, modelLoc;
@@ -955,12 +955,51 @@ int main()
     );
     tvStandParts.push_back(drawerBottom);
 
-    Cube drawerTop(
+    Cube drawerSide(
         glm::vec3(0.0f, inchesToMeters(9.5f + 12.0f / 2), 0.0f), // Position
         glm::vec3(1.0f, 0.3f, 0.5f),                                        // Rotation axis
         glm::vec3(feetToMeters(4.81f), inchesToMeters(1.0f), feetToMeters(2.0f)), // Scale
         glm::vec3(0.0f),                                                    // Angle
         glm::vec4(0.0f, 0.0f, 0.0f, 1.0f),
+        "./side.jpg"
+    );
+    tvStandParts.push_back(drawerSide);
+
+    Cube drawerEdge(
+        glm::vec3(-0.7f, inchesToMeters(9.521f + 12.0f / 2), 0.0f), // Position
+        glm::vec3(1.0f, 0.3f, 0.5f),                                        // Rotation axis
+        glm::vec3(feetToMeters(4.805f)/40, inchesToMeters(0.99f), feetToMeters(1.99f)), // Scale
+        glm::vec3(0.0f),                                                    // Angle
+        glm::vec4(0.0f, 0.0f, 0.0f, 1.0f),
+        "./side.jpg"
+    );
+    tvStandParts.push_back(drawerEdge);
+
+    Cube drawerReflection(
+        glm::vec3(-0.64f, inchesToMeters(9.521f + 12.0f / 2), 0.0007f), // Position
+        glm::vec3(1.0f, 0.3f, 0.5f),                                        // Rotation axis
+        glm::vec3(feetToMeters(4.805f)/40, inchesToMeters(0.99f), feetToMeters(2.05f)), // Scale
+        glm::vec3(0.0f, 15.0f, 0.0f),                                                    // Angle
+        glm::vec4(0.0f, 0.0f, 0.0f, 0.6f),
+        "./reflect.jpg"
+    );
+    tvStandParts.push_back(drawerReflection);
+    Cube drawerReflection2(
+        glm::vec3(0.0f, inchesToMeters(9.521f + 12.0f / 2), 0.0f), // Position
+        glm::vec3(1.0f, 0.3f, 0.5f),                                        // Rotation axis
+        glm::vec3(feetToMeters(4.805f)/20, inchesToMeters(0.99f), feetToMeters(1.99f)), // Scale
+        glm::vec3(0.0f, 0.0f, 0.0f),                                                    // Angle
+        glm::vec4(0.0f, 0.0f, 0.0f, 0.6f),
+        "./reflect.jpg"
+    );
+    tvStandParts.push_back(drawerReflection2);
+
+    Cube drawerTop(
+        glm::vec3(0.0f, inchesToMeters(9.52f + 12.0f / 2), 0.0f), // Position
+        glm::vec3(1.0f, 0.3f, 0.5f),                                        // Rotation axis
+        glm::vec3(feetToMeters(4.805f), inchesToMeters(0.99f), feetToMeters(1.99f)), // Scale
+        glm::vec3(0.0f),                                                    // Angle
+        glm::vec4(0.0f, 0.0f, 0.0f, 0.9f),
         "./base.jpg"
     );
     tvStandParts.push_back(drawerTop);
@@ -1007,19 +1046,9 @@ int main()
     );
     tvStandParts.push_back(handleRight);
 
-    // 2. Top Shelf
-    Cube topShelf(
-        glm::vec3(0.0f, inchesToMeters(4.5f + 12.0f + 12.0f + 0.75f / 2), 0.0f),
-        glm::vec3(1.0f, 0.3f, 0.5f),
-        glm::vec3(feetToMeters(5.0f), inchesToMeters(0.75f), feetToMeters(2.0f)),
-        glm::vec3(0.0f), 
-        glm::vec4(0.392f, 0.392f, 0.352f, 1.0f)
-    );
-    tvStandParts.push_back(topShelf);
-
     float xPos = 2.2f;
     float zPos = 0.95f;
-    // 3. Feet
+    // Feet
     std::vector<glm::vec3> feetPositions = {
         glm::vec3(feetToMeters(-xPos), inchesToMeters(4.0f / 2), feetToMeters(-zPos + 0.05f)),
         glm::vec3(feetToMeters(xPos), inchesToMeters(4.0f / 2), feetToMeters(-zPos + 0.05f)),
@@ -1038,7 +1067,7 @@ int main()
         tvStandParts.push_back(foot);
     }
 
-    // 4. Posts
+    // Posts
     std::vector<glm::vec3> postPositions = {
         glm::vec3(feetToMeters(-xPos-0.16f), inchesToMeters(4.0f + 12.0f + 12.0f / 2), feetToMeters(-zPos)),
         glm::vec3(feetToMeters(xPos+0.16f), inchesToMeters(4.0f + 12.0f + 12.0f / 2), feetToMeters(-zPos)),
@@ -1067,6 +1096,27 @@ int main()
         i++;
         tvStandParts.push_back(post);
     }
+
+    // Top Shelf
+    Cube topShelfHighlight(
+        glm::vec3(-0.58f, inchesToMeters(4.83f + 12.0f + 12.0f + 0.75f / 2), 0.0f),
+        glm::vec3(1.0f, 0.3f, 0.5f),
+        glm::vec3(feetToMeters(1.2f), inchesToMeters(0.1f), feetToMeters(2.0f)),
+        glm::vec3(0.0f), 
+        glm::vec4(1.0f, 1.0f, 1.0f, 0.6f),
+        "./wall.jpg"
+    );
+    tvStandParts.push_back(topShelfHighlight);
+
+    // Top Shelf
+    Cube topShelf(
+        glm::vec3(0.0f, inchesToMeters(4.5f + 12.0f + 12.0f + 0.75f / 2), 0.0f),
+        glm::vec3(1.0f, 0.3f, 0.5f),
+        glm::vec3(feetToMeters(5.0f), inchesToMeters(0.75f), feetToMeters(2.0f)),
+        glm::vec3(0.0f), 
+        glm::vec4(0.392f, 0.392f, 0.352f, 0.6f)
+    );
+    tvStandParts.push_back(topShelf);
     // ----------------------------------------------------------------------------
 
     // Draw the wii sensor bar ----------------------------------------------------
@@ -1105,7 +1155,7 @@ int main()
     // Draw the towel -------------------------------------------------------------
 
     Towel towel(
-        glm::vec3(-0.27f, topShelfYPos - inchesToMeters(0.5f), 0.0f), // Position on the shelf
+        glm::vec3(-0.27f, topShelfYPos - inchesToMeters(0.5f), 0.04f), // Position on the shelf
         glm::vec3(0.1f),               // Default scale (already folded towel)
         glm::vec3(0.5f, 90.0f, 0.7f),
         glm::vec4(0.868f, 0.96f, 0.596f, 1.0f),  // Towel color (Greenish)
@@ -1433,18 +1483,6 @@ int main()
         SetupOpenGLState(ourShader, objectColorLoc, modelLoc);
 
         // Bind the objects VAO
-        glBindVertexArray(tvStandParts[0].VAO);    
-        // Draw the TV stand parts
-        for (const auto& part : tvStandParts)
-        {
-            // Set the object color alpha value to the part's alpha
-            glUniform1f(glGetUniformLocation(ourShader.Program, "objectAlpha"), part.color.w);
-            part.draw(ourShader, objectColorLoc, modelLoc);
-        }
-        // Unbind the objects VAO
-        glBindVertexArray(0);
-
-        // Bind the objects VAO
         glBindVertexArray(wii[0].VAO); 
         // Draw the wii
         for (const auto& piece : wii)
@@ -1537,6 +1575,18 @@ int main()
         glBindVertexArray(0); 
 
         // Bind the objects VAO
+        glBindVertexArray(tvStandParts[0].VAO);    
+        // Draw the TV stand parts
+        for (const auto& part : tvStandParts)
+        {
+            // Set the object color alpha value to the part's alpha
+            glUniform1f(glGetUniformLocation(ourShader.Program, "objectAlpha"), part.color.w);
+            part.draw(ourShader, objectColorLoc, modelLoc);
+        }
+        // Unbind the objects VAO
+        glBindVertexArray(0);
+
+        // Bind the objects VAO
         glBindVertexArray(tvStands[0].VAO); 
         for (const auto& part : tvStands)
         {
@@ -1622,7 +1672,7 @@ GLFWwindow* windowInit()
     glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
 
     // Create a GLFWwindow object that we can use for GLFW's functions
-    GLFWwindow* window = glfwCreateWindow(WIDTH, HEIGHT, "CST-310 Project 4", nullptr, nullptr);
+    GLFWwindow* window = glfwCreateWindow(WIDTH, HEIGHT, "CST-310 Project 5", nullptr, nullptr);
     glfwMakeContextCurrent(window);
     // Set the required callback functions
     glfwSetKeyCallback(window, key_callback);
